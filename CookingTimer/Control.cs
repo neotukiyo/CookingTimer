@@ -3,19 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace CookingTimer
 {
-    static public class Control
+    public class Control
     {
-        static public void StartMusic(string path)
-        {
+        private SoundPlayer player = null;
+        private string sPath = "";
 
+        public Control(string path)
+        {
+            sPath = path;
         }
 
-        static public void StopMusic(string path)
+        public void StartMusic()
         {
+            // ミュージックファイルの取得
+            player = new SoundPlayer(sPath);
 
+            player.Play(); //非同期再生 
+            
+        }
+
+        public void StopMusic()
+        {
+            if (player != null)
+            {
+                player.Stop();
+                player.Dispose();
+            }
         }
 
     }
